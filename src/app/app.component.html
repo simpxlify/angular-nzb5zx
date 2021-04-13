@@ -1,0 +1,73 @@
+<form [formGroup]="profileForm" (submit)="onSubmit(profileForm)" novalidate>
+  <!-- X -->
+  <div formArrayName="updateAddress">
+    <div *ngFor="let X of f.updateAddress['controls']; let addIndex=index">
+      <div formGroupName="{{addIndex}}">
+        <label>
+          Rua:
+        </label>
+        <input type="text" formControlName="address">
+        <div *ngIf="X['controls'].address?.invalid && (X['controls'].address?.dirty || X['controls'].address?.touched)">
+          <div *ngIf="X['controls'].address?.errors?.required">
+            <p style="color:red">Tem de escrever a rua da sua loja.</p>
+          </div>
+        </div>
+        <p *ngIf="X['controls'].address?.errors?.pattern">Error pattern</p>
+
+        <label>
+          Rua2:
+        </label>
+        <input type="text" formControlName="address2">
+        <div
+          *ngIf="X['controls'].address2?.invalid && (X['controls'].address2?.dirty || X['controls'].address2?.touched)">
+          <div *ngIf="X['controls'].address2?.errors?.required">
+            <p style="color:red">Tem de escrever a rua 2 da sua loja.</p>
+          </div>
+        </div>
+        <p *ngIf="X['controls'].address2?.errors?.pattern">Error pattern</p>
+        <br>
+        <br>
+        <label>
+          Cidade:
+        </label>
+        <input type="text" formControlName="city">
+        <div *ngIf="X['controls'].city?.invalid && (X['controls'].city?.dirty || X['controls'].city?.touched)">
+          <div *ngIf="X['controls'].city?.errors?.required">
+            <p style="color:red">Tem de escrever a cidade da sua loja.</p>
+          </div>
+        </div>
+        <p *ngIf="X['controls'].city?.errors?.pattern">Error pattern</p>
+        <br>
+        <br>
+
+        <label>
+          Codigo Postal:
+        </label>
+        <input type="text" formControlName="postalCode">
+        <div
+          *ngIf="X['controls'].postalCode?.invalid && (X['controls'].postalCode?.dirty || X['controls'].postalCode?.touched)">
+          <div *ngIf="X['controls'].postalCode?.errors?.required">
+            <p style="color:red">Tem de escrever o codigo postal da sua loja.</p>
+          </div>
+        </div>
+        <p *ngIf="X['controls'].postalCode?.errors?.pattern">Error pattern</p>
+
+        <label>
+          Localidade:
+        </label>
+        <input type="text" formControlName="area">
+        <div *ngIf="X['controls'].area?.invalid && (X['controls'].area?.dirty || X['controls'].area?.touched)">
+          <div *ngIf="X['controls'].area?.errors?.required">
+            <p>Tem de escrever a localidade da sua loja.</p>
+          </div>
+        </div>
+        <p *ngIf="X['controls'].area?.errors?.pattern">Error pattern</p>
+        <button (click)="removeAddress(addIndex)">Remover</button>
+      </div>
+    </div>
+    <input type="button" (click)="addAddress()" value="Adicionar outra morada">
+  </div>
+  <!-- X End -->
+  <button type="submit">SUBMIT</button>
+  <form>
+    <pre style="font-size:12px">{{ profileForm.value | json }}</pre>
